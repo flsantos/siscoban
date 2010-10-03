@@ -1,10 +1,11 @@
 package br.com.siscoban.views;
 
 import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Toolkit;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -17,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+
 
 
 public class ViewLogin extends JInternalFrame {
@@ -34,18 +36,20 @@ public class ViewLogin extends JInternalFrame {
 	
 	
 	public ViewLogin() {
-		super("Identificação do Usuário",true,true,true,false);
+		super("Identificação do Usuário",false,false,false,false);
+		
+		
 		
 		this.add(getPanelLogin());
 		this.setSize(350,150);
 		this.setVisible(true);
-		
-		
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+		Rectangle screenSize = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 		Dimension paneSize = this.getSize();
 		
-		this.setLocation((screenSize.width - paneSize.width) / 2, 
-						 (screenSize.height - paneSize.height) / 2); 
+		
+		this.setLocation((screenSize.width - paneSize.width) / 2, (screenSize.height - paneSize.height - 100) / 2); 
+		
 	
 	}
 
