@@ -1,114 +1,92 @@
 package br.com.siscoban.views;
 
-import java.awt.BorderLayout;
-import javax.swing.JPanel;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
+import java.awt.Color;
 import java.awt.Dimension;
-import javax.swing.JMenuItem;
+import java.awt.Frame;
+import java.awt.GraphicsConfiguration;
+import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.event.HierarchyBoundsListener;
+import java.awt.event.HierarchyEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowStateListener;
+import java.awt.image.ColorModel;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-import br.com.siscoban.views.cadastrodeprodutos.CadastroDeProduto;
+import javax.swing.JDesktopPane;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
 
-import java.awt.event.KeyEvent;
 
 public class SiscobanFrame extends JFrame {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel jContentPane = null;
-	private JMenuBar menuPrincipal = null;
-	private JMenu menuCadastro = null;
-	private JMenuItem itemProduto = null;
-	private CadastroDeProduto cadastroDeProduto;
 	
-	/**
-	 * This is the default constructor
-	 * @throws UnsupportedLookAndFeelException 
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 * @throws  
-	 */
-	public SiscobanFrame() throws Exception {
+	private static final long serialVersionUID = -1;
+	private static SiscobanFrame instance = null;
+	private JDesktopPane desktopPane;
+	
+	
+	public SiscobanFrame () {
 		super();
-		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		initialize();
+		
 	}
-
-	/**
-	 * This method initializes this
-	 * 
-	 * @return void
-	 */
+	
+	
+	
 	private void initialize() {
-		this.setSize(800, 600);
-		this.setJMenuBar(getMenuPrincipal());
+
+		JFrame.setDefaultLookAndFeelDecorated(true);
+
+		desktopPane = new JDesktopPane();
+		desktopPane.setBackground(new JPanel().getBackground());
+		this.setContentPane(desktopPane);
+		this.setJMenuBar(new MenuAjuda());
+		
 		this.setTitle("Siscoban");
+		this.setVisible(true);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		this.setContentPane(getJContentPane());
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		
+		this.getContentPane().addHierarchyBoundsListener(new HierarchyBoundsListener(){
+			public void ancestorMoved(HierarchyEvent e) {
+				setLocationRelativeTo(null);		
+			}
+			public void ancestorResized(HierarchyEvent e) {
+				setExtendedState(JFrame.MAXIMIZED_BOTH);
+			}			
+		});
+
+		chamaLogin();
+		
+	}
+	
+	private void chamaLogin() {
+		ViewLogin viewLogin = new ViewLogin();
+		desktopPane.add(viewLogin);
+		try {
+			viewLogin.setSelected(true);
+        } catch (java.beans.PropertyVetoException e) {}
 	}
 
-	/**
-	 * This method initializes jContentPane
-	 * 
-	 * @return javax.swing.JPanel
-	 */
-	private JPanel getJContentPane() {
-		if (jContentPane == null) {
-			jContentPane = new JPanel();
-			jContentPane.setLayout(new BorderLayout());
+
+
+	public static SiscobanFrame getInstance () {
+		if ( instance == null ) {
+			return new SiscobanFrame();
 		}
-		return jContentPane;
+		return instance;
 	}
 
-	/**
-	 * This method initializes menuPrincipal	
-	 * 	
-	 * @return javax.swing.JMenuBar	
-	 */
-	private JMenuBar getMenuPrincipal() {
-		if (menuPrincipal == null) {
-			menuPrincipal = new JMenuBar();
-			menuPrincipal.setPreferredSize(new Dimension(0, 25));
-			menuPrincipal.add(getMenuCadastro());
-		}
-		return menuPrincipal;
-	}
 
-	/**
-	 * This method initializes menuCadastro	
-	 * 	
-	 * @return javax.swing.JMenu	
-	 */
-	private JMenu getMenuCadastro() {
-		if (menuCadastro == null) {
-			menuCadastro = new JMenu();
-			menuCadastro.setText("Cadastro");
-			menuCadastro.setToolTipText("Cadastro");
-			menuCadastro.add(getItemProduto());
-		}
-		return menuCadastro;
-	}
 
-	/**
-	 * This method initializes itemProduto	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	private JMenuItem getItemProduto() {
-		if (itemProduto == null) {
-			itemProduto = new JMenuItem();
-			itemProduto.setText("Cadastro de Produtos");
-			itemProduto.setMnemonic(KeyEvent.VK_UNDEFINED);
-			itemProduto.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					cadastroDeProduto = new CadastroDeProduto();
-				}
-			});
-		}
-		return itemProduto;
-	}
+	public static void main (String args[] ) throws Exception {
+		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
+		instance = new SiscobanFrame();
+	}
 }
+
