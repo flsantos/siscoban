@@ -1,11 +1,17 @@
-package br.com.siscoban.views;
+package br.com.siscoban.views.Menus;
 
+import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+
+import br.com.siscoban.views.SiscobanFrame;
+import br.com.siscoban.views.CadastroDeProduto.ViewCadastroDeProduto;
 
 public class MenuPrincipal extends JMenuBar implements ActionListener {
 
@@ -293,7 +299,7 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
 		JMenuItem source = (JMenuItem)(arg0.getSource());
 		
 		if (source == cadastroProduto) {
-			//Chama a janela de cadastro de produto
+			SiscobanFrame.getInstance().getContentPane().add(new ViewCadastroDeProduto());
 		}else if (source == cadastroCorrecao) {
 			//Chama a janela de correção
 		}

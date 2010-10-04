@@ -1,4 +1,4 @@
-package br.com.siscoban.views;
+package br.com.siscoban.views.Menus;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -5,17 +5,15 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.event.HierarchyBoundsListener;
 import java.awt.event.HierarchyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.UnsupportedLookAndFeelException;
+
+import br.com.siscoban.views.Login.ViewLogin;
+import br.com.siscoban.views.Menus.MenuAjuda;
+
 
 
 
@@ -52,15 +50,15 @@ public class SiscobanFrame extends JFrame {
 		this.setVisible(true);
 		
 		this.setSize(rec.width, rec.height);
-		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-		this.setMinimumSize(new Dimension(screenWidth, screenHeight));
-		this.setMaximumSize(new Dimension(screenWidth, screenHeight));
+		//this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+		//this.setMinimumSize(new Dimension(screenWidth, screenHeight));
+		//this.setMaximumSize(new Dimension(screenWidth, screenHeight));
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		
+		this.setResizable(true);
 		//this.setExtendedState(JFrame.MAXIMIZED_BOTH); //Esse comando tira as bordas e deixa a tela mais feia
-		this.getContentPane().addHierarchyBoundsListener(new HierarchyBoundsListener(){
+		/*this.getContentPane().addHierarchyBoundsListener(new HierarchyBoundsListener(){
 			public void ancestorMoved(HierarchyEvent e) {
 				//setLocationRelativeTo(null);
 				setLocation(0,0);
@@ -68,7 +66,7 @@ public class SiscobanFrame extends JFrame {
 			public void ancestorResized(HierarchyEvent e) {
 				setSize(screenWidth, screenHeight);
 			}			
-		});
+		});*/
 
 		chamaLogin();
 		

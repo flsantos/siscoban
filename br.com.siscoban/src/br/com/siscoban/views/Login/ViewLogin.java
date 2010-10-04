@@ -1,4 +1,4 @@
-package br.com.siscoban.views;
+package br.com.siscoban.views.Login;
 
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
@@ -18,6 +18,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+
+import br.com.siscoban.views.SiscobanFrame;
+import br.com.siscoban.views.Menus.MenuPrincipal;
 
 
 
@@ -40,7 +43,7 @@ public class ViewLogin extends JInternalFrame {
 		
 		
 		
-		this.add(getPanelLogin());
+		this.getContentPane().add(getPanelLogin());
 		this.setSize(350,150);
 		this.setVisible(true);
 
