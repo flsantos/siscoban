@@ -10,15 +10,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
+import br.com.siscoban.models.ModelLogin;
+import br.com.siscoban.pojos.Usuario;
+import br.com.siscoban.utils.DefaultException;
 import br.com.siscoban.views.SiscobanFrame;
 import br.com.siscoban.views.Menus.MenuPrincipal;
 
@@ -105,45 +110,29 @@ public class ViewLogin extends JInternalFrame {
 	
 	public void listeners(){		
 		buttonEntrar.addActionListener(new ActionListener() {
-
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				doDefaultCloseAction();
-				SiscobanFrame.getInstance().remove(SiscobanFrame.getInstance().getJMenuBar());
-				SiscobanFrame.getInstance().setJMenuBar(new MenuPrincipal());
+				Usuario usuario = new Usuario();
+				usuario.setLogin(usuarioText.getText());
+				usuario.setSenha(senhaText.getPassword());
+				ModelLogin modelLogin = new ModelLogin(usuario);
+				
+				try  {
+					modelLogin.usuarioOk();
+					
+					doDefaultCloseAction();
+					SiscobanFrame.getInstance().remove(SiscobanFrame.getInstance().getJMenuBar());
+					SiscobanFrame.getInstance().setJMenuBar(new MenuPrincipal());
+				}
+				catch (DefaultException de) {
+					JOptionPane.showMessageDialog(null, de.getMsg(), "Siscoban", JOptionPane.WARNING_MESSAGE);
+					//de.printStackTrace();
+					usuarioText.selectAll();
+					usuarioText.requestFocus();
+				}
 			}
 			
 		});
-			/*@SuppressWarnings("deprecation")
-			public void actionPerformed(ActionEvent e) {
-				LoginModel modeloLogin = new LoginModel();
-				usuario = new Usuario();
-				usuario.setSenha(senhaText.getText());
-				usuario.setUsuario(usuarioText.getText());
-				try {
-					usuario =  modeloLogin.usuarioOk( usuario );
-					Constantes.usuario = usuario;
-					
-					MainFrame.getInstance().remove( MainFrame.getInstance().getJMenuBar()  );
-					MainFrame.getInstance().setJMenuBar(new MenuPrincipal() );
-					
-					MainFrame.getInstance().remove( MainFrame.getInstance().getContentPane()  );
-					MainFrame.getInstance().setContentPane(JanelaInicial.getInstance());
-					
-					MainFrame.getInstance().changeUI();
-					
-					MainFrame.getInstance().adicionaListeners();
-					
-				} 
-				catch (DefaultException e1) {
-					JOptionPane.showMessageDialog(null, e1.getMsg(), "APAC", JOptionPane.WARNING_MESSAGE);
-					e1.printStackTrace();
-					usuarioText.requestFocus();
-					usuarioText.selectAll();
-				}
-
-			}
-		});*/
+			
 		
 		
 		usuarioText.addActionListener(new ActionListener() {
