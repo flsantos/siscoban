@@ -1,10 +1,7 @@
 package br.com.siscoban.views;
 
-import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
-import java.awt.event.HierarchyBoundsListener;
-import java.awt.event.HierarchyEvent;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -23,8 +20,6 @@ public class SiscobanFrame extends JFrame {
 	private static final long serialVersionUID = -1;
 	private static SiscobanFrame instance;
 	private JDesktopPane desktopPane;
-	private static int screenHeight;
-	private static int screenWidth;
 	
 	
 	public SiscobanFrame () {
@@ -43,8 +38,6 @@ public class SiscobanFrame extends JFrame {
 		this.setJMenuBar(new MenuAjuda());
 		
 		Rectangle rec = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-		screenHeight = rec.height;
-		screenWidth = rec.width;
 		
 		this.setTitle("Siscoban");
 		this.setVisible(true);
