@@ -11,13 +11,8 @@ import br.com.siscoban.utils.HibernateUtil;
 
 public class ModelLogin {
 	
-	private Usuario usuario;
-	
-	public ModelLogin ( Usuario usuario ) {
-		this.usuario = usuario;
-	}
 
-	public void usuarioOk() throws DefaultException {
+	public void usuarioOk( Usuario usuario ) throws DefaultException {
 		
 		Session session = new HibernateUtil().getSession();
 		UsuarioDAO usuarioDAO = new UsuarioDAO(session);
@@ -26,6 +21,9 @@ public class ModelLogin {
 		
 		if (!users.iterator().hasNext()) {
 			throw new DefaultException("Usuário ou senha incorretos!");
+		}
+		else {
+			usuario = users.iterator().next();
 		}
 		
 	}

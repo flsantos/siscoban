@@ -8,6 +8,8 @@ import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 
 
@@ -24,6 +26,7 @@ import javax.swing.KeyStroke;
 import br.com.siscoban.models.ModelLogin;
 import br.com.siscoban.pojos.Usuario;
 import br.com.siscoban.utils.DefaultException;
+import br.com.siscoban.utils.UsuarioAtual;
 import br.com.siscoban.views.SiscobanFrame;
 import br.com.siscoban.views.Menus.MenuPrincipal;
 
@@ -46,15 +49,12 @@ public class ViewLogin extends JInternalFrame {
 	public ViewLogin() {
 		super("Identificação do Usuário",false,false,false,false);
 		
-		
-		
 		this.getContentPane().add(getPanelLogin());
 		this.setSize(350,150);
 		this.setVisible(true);
 
 		Rectangle screenSize = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 		Dimension paneSize = this.getSize();
-		
 		
 		this.setLocation((screenSize.width - paneSize.width) / 2, (screenSize.height - paneSize.height - 100) / 2); 
 		
@@ -75,8 +75,8 @@ public class ViewLogin extends JInternalFrame {
 		
 		usuarioText.requestFocus();
 		usuarioText.grabFocus();
-		usuarioText.setText("");
-		senhaText.setText("");
+		usuarioText.setText("manager");
+		senhaText.setText("siscoban");
 
 		painelLogin.setMinimumSize(new Dimension(200, 100));
 		painelLogin.setPreferredSize(new Dimension(200, 100));
@@ -114,11 +114,12 @@ public class ViewLogin extends JInternalFrame {
 				Usuario usuario = new Usuario();
 				usuario.setLogin(usuarioText.getText());
 				usuario.setSenha(senhaText.getPassword());
-				ModelLogin modelLogin = new ModelLogin(usuario);
+				ModelLogin modelLogin = new ModelLogin();
 				
 				try  {
-					modelLogin.usuarioOk();
+					modelLogin.usuarioOk(usuario);
 					
+					UsuarioAtual.getInstance().setUsuario(usuario);
 					doDefaultCloseAction();
 					SiscobanFrame.getInstance().remove(SiscobanFrame.getInstance().getJMenuBar());
 					SiscobanFrame.getInstance().setJMenuBar(new MenuPrincipal());
@@ -138,11 +139,27 @@ public class ViewLogin extends JInternalFrame {
 		usuarioText.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				senhaText.requestFocus();
-				if (!senhaText.getPassword().equals(""))
-					senhaText.selectAll();
 			}
 		});
 		
+		usuarioText.addFocusListener(new FocusListener() {
+			public void focusGained(FocusEvent arg0) {
+				if (!usuarioText.getText().equals(""))
+					usuarioText.selectAll();
+			}
+			public void focusLost(FocusEvent arg0) {
+			}
+		});
+		
+		senhaText.addFocusListener(new FocusListener() {
+			public void focusGained(FocusEvent arg0) {
+				if (!senhaText.getPassword().equals(""))
+					senhaText.selectAll();
+			}
+			public void focusLost(FocusEvent arg0) {
+			}
+		});
+
 		
 		senhaText.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

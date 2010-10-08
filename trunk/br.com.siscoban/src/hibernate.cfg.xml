@@ -15,7 +15,7 @@
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
 
 		<!--
-		<mapping class="br.com.caelum.Produto"/>
+		<mapping class="br.com.caelum.SUA CLASSE AQUI!"/>
 		<mapping class="br.com.caelum.AdicionaProduto"/>
 		-->
 	

@@ -2,6 +2,8 @@ package br.com.siscoban.views;
 
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
+import java.awt.event.HierarchyBoundsListener;
+import java.awt.event.HierarchyEvent;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -37,7 +39,7 @@ public class SiscobanFrame extends JFrame {
 		this.setContentPane(desktopPane);
 		this.setJMenuBar(new MenuAjuda());
 		
-		Rectangle rec = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+		final Rectangle rec = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 		
 		this.setTitle("Siscoban");
 		this.setVisible(true);
@@ -51,15 +53,15 @@ public class SiscobanFrame extends JFrame {
 
 		this.setResizable(true);
 		//this.setExtendedState(JFrame.MAXIMIZED_BOTH); //Esse comando tira as bordas e deixa a tela mais feia
-		/*this.getContentPane().addHierarchyBoundsListener(new HierarchyBoundsListener(){
+		this.getContentPane().addHierarchyBoundsListener(new HierarchyBoundsListener(){
 			public void ancestorMoved(HierarchyEvent e) {
 				//setLocationRelativeTo(null);
 				setLocation(0,0);
 			}
 			public void ancestorResized(HierarchyEvent e) {
-				setSize(screenWidth, screenHeight);
+				setSize(rec.width, rec.height);
 			}			
-		});*/
+		});
 
 		chamaLogin();
 		
