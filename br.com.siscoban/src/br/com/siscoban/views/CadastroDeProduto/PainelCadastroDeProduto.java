@@ -11,8 +11,6 @@
 
 package br.com.siscoban.views.CadastroDeProduto;
 
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 
 /**
@@ -80,11 +78,18 @@ public class PainelCadastroDeProduto extends javax.swing.JPanel {
         jFormattedTextField2 = new javax.swing.JFormattedTextField();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
-        
         final javax.swing.JTextField ftf = jTextField2;  
         javax.swing.SwingUtilities.invokeLater(new Runnable() {  
             public void run() {  
                 ftf.requestFocusInWindow();  
+                ftf.addFocusListener(new java.awt.event.FocusAdapter() {
+                    public void focusGained(java.awt.event.FocusEvent evt) {
+                        jTextField3FocusGained(evt);
+                        if (!ftf.getText().equals("")) {
+                            ftf.selectAll();
+                        }
+                    }
+                });
             }  
         });
         jTextField6 = new javax.swing.JTextField();
@@ -350,6 +355,7 @@ public class PainelCadastroDeProduto extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤ ###,###,##0.00"))));
         jFormattedTextField1.setToolTipText("Preço de venda do produto");
         jFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -640,78 +646,78 @@ public class PainelCadastroDeProduto extends javax.swing.JPanel {
         // TODO add your handling code here:
     }                                          
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         jTextField3.requestFocus();
-    }
+    }                                           
 
-    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {
+    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
-    }
+    }                                            
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         jTextField2.requestFocus();
-    }
+    }                                           
 
-    private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {
+    private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {                                                     
         jTextField7.requestFocus();
-    }
+    }                                                    
 
-    private void jFormattedTextField2ActionPerformed(java.awt.event.ActionEvent evt) {
+    private void jFormattedTextField2ActionPerformed(java.awt.event.ActionEvent evt) {                                                     
         jTextField6.requestFocus();
-    }
+    }                                                    
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         jButton3.requestFocus();
-    }
+    }                                           
 
-    private void jTextField2FocusGained(java.awt.event.FocusEvent evt) {
+    private void jTextField2FocusGained(java.awt.event.FocusEvent evt) {                                        
         if (!jTextField2.getText().equals("")) {
             jTextField2.selectAll();
             jTextField2.setCaretPosition(0);
         }
-    }
+    }                                       
 
-    private void jTextField3FocusGained(java.awt.event.FocusEvent evt) {
+    private void jTextField3FocusGained(java.awt.event.FocusEvent evt) {                                        
         if (!jTextField3.getText().equals("")) {
             jTextField3.selectAll();
         }
-    }
+    }                                       
 
-    private void jTextField4FocusGained(java.awt.event.FocusEvent evt) {
+    private void jTextField4FocusGained(java.awt.event.FocusEvent evt) {                                        
         if (!jTextField4.getText().equals("")) {
             jTextField4.selectAll();
         }
-    }
+    }                                       
 
-    private void jTextField5FocusGained(java.awt.event.FocusEvent evt) {
+    private void jTextField5FocusGained(java.awt.event.FocusEvent evt) {                                        
         if (!jTextField5.getText().equals("")) {
             jTextField5.selectAll();
         }
-    }
+    }                                       
 
-    private void jFormattedTextField1FocusGained(java.awt.event.FocusEvent evt) {
+    private void jFormattedTextField1FocusGained(java.awt.event.FocusEvent evt) {                                                 
         if (!jFormattedTextField1.getText().equals("")) {
             jFormattedTextField1.selectAll();
         }
-    }
+    }                                                
 
-    private void jFormattedTextField2FocusGained(java.awt.event.FocusEvent evt) {
+    private void jFormattedTextField2FocusGained(java.awt.event.FocusEvent evt) {                                                 
         if (!jFormattedTextField2.getText().equals("")) {
             jFormattedTextField2.selectAll();
         }
-    }
+    }                                                
 
-    private void jTextField7FocusGained(java.awt.event.FocusEvent evt) {
+    private void jTextField7FocusGained(java.awt.event.FocusEvent evt) {                                        
         if (!jTextField7.getText().equals("")) {
             jTextField7.selectAll();
         }
-    }
+    }                                       
 
-    private void jTextField6FocusGained(java.awt.event.FocusEvent evt) {
+    private void jTextField6FocusGained(java.awt.event.FocusEvent evt) {                                        
         if (!jTextField6.getText().equals("")) {
             jTextField6.selectAll();
         }
-    }
+    }                                       
 
 
     // Variables declaration - do not modify
