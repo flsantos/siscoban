@@ -1,0 +1,1 @@
+Sistema de automação comercial para bancas, revistarias, padarias e comércios pequenos em geral.
